@@ -23,7 +23,7 @@ jobs:
                   cache: "pnpm"
 
             - name: install deps
-              run: pnpm install --frozen-lockfile
+              run: pnpm install --frozen-lockfile --ignore-scripts
             - name: lint
               run: pnpm run lint --max-warnings 0
             - name: test
