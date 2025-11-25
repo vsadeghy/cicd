@@ -1,6 +1,20 @@
 services:
     app:
-        container_name: cicd
-        build: .
+        image: ghcr.io/vsadeghy/cicd:latest
+        container_name: app
+        restart: unless-stopped
         ports:
             - 3000:3000
+    watchtower:
+        image: containrrr/watchtower:latest
+        container_name: watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        restart: unless-stopped
+        environment:
+            # - WATCHTOWER_NOTIFICATION_URL=slack://xoxb-...
+            # - WATCHTOWER_HTTP_API_TOKEN=mytoken
+            - WATCHTOWER_SCHEDULE=30 * * * * *
+        command: --cleanup app # --http-api-update # allows manual update using GET /v1/update
+        # ports:
+        #     - 8080:8080
