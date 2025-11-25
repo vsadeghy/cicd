@@ -24,7 +24,7 @@ jobs:
             - name: install deps
               run: pnpm install --frozen-lockfile --ignore-scripts
             - name: lint
-              run: pnpm lint
+              run: pnpm lint --max-warnings 0
             - name: format
               run: pnpm format:check
             - name: types

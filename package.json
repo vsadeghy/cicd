@@ -8,8 +8,8 @@
 	"scripts": {
 		"build": "tsc",
 		"start:prod": "node dist/index.js",
-		"lint": "eslint . --ext .ts --max-warnings 0",
-		"lint:fix": "eslint --fix . --ext .ts",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"typecheck": "tsc --noEmit",
@@ -23,7 +23,6 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-unused-imports": "^4.3.0",
 		"prettier": "^3.6.2",
-		"tsc": "^2.0.4",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.48.0",
 		"vitest": "^4.0.13"
