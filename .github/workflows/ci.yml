@@ -1,4 +1,4 @@
-name: build-and-lint
+name: check and build
 on:
     push:
         branches: [main, dev]
@@ -6,10 +6,10 @@ on:
         branches: [main, dev]
 
 jobs:
-    build-and-lint:
+    checks:
         runs-on: ubuntu-slim
         steps:
-            - name: Checkout repo
+            - name: checkout
               uses: actions/checkout@v6
             - name: install pnpm
               uses: pnpm/action-setup@v4
@@ -31,5 +31,12 @@ jobs:
               run: pnpm typecheck
             - name: test
               run: pnpm test
+
+    build:
+        needs: checks
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v6
             - name: build
               run: docker build -t cicd .
