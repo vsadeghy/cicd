@@ -15,11 +15,9 @@ COPY . .
 RUN pnpm run build
 
 FROM node:25-alpine AS runner
-RUN apk add --no-cache tini
 WORKDIR /app
 COPY --from=prod-deps --chown=node:node /app/node_modules ./node_modules
 COPY --from=build --chown=node:node /app/dist ./dist
 USER node
 expose 3000
-ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["node", "dist/index.js"]
