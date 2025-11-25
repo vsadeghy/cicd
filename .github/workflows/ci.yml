@@ -7,7 +7,7 @@ on:
 
 jobs:
     build-and-lint:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-slim
         steps:
             - name: Checkout repo
               uses: actions/checkout@v6
@@ -15,18 +15,21 @@ jobs:
               uses: pnpm/action-setup@v4
               with:
                   version: 10.16.1
-                  run_install: false
             - name: setup node
               uses: actions/setup-node@v6
               with:
                   node-version: 25
-                  cache: "pnpm"
+                  cache: pnpm
 
             - name: install deps
               run: pnpm install --frozen-lockfile --ignore-scripts
             - name: lint
-              run: pnpm run lint --max-warnings 0
+              run: pnpm lint
+            - name: format
+              run: pnpm format:check
+            - name: types
+              run: pnpm typecheck
             - name: test
-              run: pnpm run test
+              run: pnpm test
             - name: build
               run: docker build -t cicd .
