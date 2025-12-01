@@ -5,6 +5,12 @@ services:
         restart: unless-stopped
         ports:
             - 3000:3000
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+            interval: 10s
+            timeout: 3s
+            retries: 3
+
     watchtower:
         image: containrrr/watchtower:latest
         container_name: watchtower
@@ -13,8 +19,7 @@ services:
         restart: unless-stopped
         environment:
             # - WATCHTOWER_NOTIFICATION_URL=slack://xoxb-...
-            # - WATCHTOWER_HTTP_API_TOKEN=mytoken
             - WATCHTOWER_SCHEDULE=30 * * * * *
-        command: --cleanup app # --http-api-update # allows manual update using GET /v1/update
-        # ports:
-        #     - 8080:8080
+        command: --cleanup --rolling-restart --stop-timeout 30s app # --http-api-update
+        ports:
+            - 8080:8080
