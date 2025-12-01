@@ -1,9 +1,16 @@
 import { createServer } from "node:http";
-const server = createServer((_req, res) => {
+const server = createServer((req, res) => {
+	if (req.method === "GET" && req.url === "/health") {
+		res.writeHead(200, { "Content-Type": "text/plain" });
+		res.end("OK");
+		return;
+	}
 	res.writeHead(200, { "Content-Type": "text/plain" });
-	res.end("not again world\n");
+	res.end("Hello World\n");
 });
-server.listen(3000, () => console.log("Server running at http://localhost:3000/"));
+server.listen(3000, () =>
+	console.log("Server running at http://localhost:3000/")
+);
 
 function gracefullShutdown() {
 	server.close(() => {
