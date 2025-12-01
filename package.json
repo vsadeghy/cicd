@@ -8,12 +8,13 @@
 	"scripts": {
 		"build": "tsc",
 		"start:prod": "node dist/index.js",
+		"start:dev": "tsx watch src/index.ts",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"typecheck": "tsc --noEmit",
-		"test": "vitest",
+		"test": "tsx --test",
 		"prepare": "husky"
 	},
 	"packageManager": "pnpm@10.16.1",
@@ -26,14 +27,9 @@
 		"husky": "^9.1.7",
 		"lint-staged": "^16.2.7",
 		"prettier": "^3.6.2",
+		"tsx": "^4.21.0",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.48.0",
-		"vitest": "^4.0.13"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
+		"typescript-eslint": "^8.48.0"
 	},
 	"lint-staged": {
 		"*.{js,json,md,yml,yaml}": "prettier --write",
