@@ -5,6 +5,8 @@ on:
     pull_request:
         branches: [main, dev]
 
+env:
+    HUSKY: 0
 jobs:
     checks:
         runs-on: ubuntu-slim

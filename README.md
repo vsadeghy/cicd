@@ -6,7 +6,7 @@ A minimal yet production-realistic Node.js + TypeScript HTTP server with a compl
 2. code is automatically checked (format, lint, type-check, tests).
 3. Docker image is built and pushed to GHCR.
 4. your server updates itself instantly with zero downtime.
-No SSH, no manual pulls, no restarts after the initial setup.
+   No SSH, no manual pulls, no restarts after the initial setup.
 
 ## Features
 
@@ -27,16 +27,20 @@ After forking, edit the file `compose.yml` in your forked repo and replace `vsad
 
 1. SSH into your server (Docker + Docker Compose must be installed)
 2. Create a directory for the app
+
 ```bash
     mkdir ~/node-cicd-demo && cd ~/node-cicd-demo
 ```
+
 3. Copy the file `compose.yml` into this directory
 4. Start everything
+
 ```bash
    docker compose up -d
 ```
 
 That’s it.
+
 # Node.js HTTP Server with Full CI/CD Automation
 
 A minimal yet production-realistic Node.js + TypeScript HTTP server with a complete end-to-end CI/CD pipeline.
